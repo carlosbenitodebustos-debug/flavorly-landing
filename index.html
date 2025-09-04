@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Flavorly AI — Your personal dining assistant</title>
+  <meta name="description" content="Pick any restaurant. Flavorly AI finds your perfect dish. Save time, money, and energy every time you eat out." />
+  <meta property="og:title" content="Flavorly AI — Your personal dining assistant" />
+  <meta property="og:description" content="Pick any restaurant. Flavorly AI finds your perfect dish." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/FF7F00/ffffff&text=Flavorly+AI" />
+  <meta name="theme-color" content="#FF7F00" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { DEFAULT: '#FF7F00', dark: '#E36F00' },
+            sand: { DEFAULT: '#FAF3E0' }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Typed.js -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
+  <!-- MailerLite Universal -->
+  <script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    ml('account', '1777931');
+  </script>
+
+  <style>
+    html, body { font-family: 'Inter', sans-serif; background: #FAF3E0; }
+    .fade-in { animation: fade-in 220ms ease-out both; }
+    @keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+
+    /* Hide MailerLite close + badge */
+    .ml-form-close, [class*="ml-form-close"],
+    .ml-form-poweredby, [class*="ml-form-poweredby"],
+    img[alt*="MailerLite"] { display: none !important; }
+  </style>
+</head>
+<body class="antialiased">
+  <!-- INTRO -->
+  <main id="intro-screen" class="min-h-screen flex items-center justify-center px-5">
+    <div class="w-full max-w-2xl">
+      <div class="rounded-3xl border shadow-xl p-8 bg-white">
+        <div class="flex items-center justify-between mb-6">
+          <div class="font-extrabold text-lg text-brand">Flavorly AI</div>
+          <div class="text-xs text-neutral-500">Exclusive pre-launch</div>
+        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-center">
+          <span id="typed"></span>
+        </h1>
+        <div class="mt-8 text-center hidden" id="cta">
+          <button id="continueBtn" type="button"
+            class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark focus:ring-2 focus:ring-brand/30">
+            Continue
+          </button>
+          <p class="mt-3 text-xs text-neutral-500">Be among the first to request access.</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FORM -->
+  <section id="form-screen" class="hidden min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-5xl px-4">
+      <div class="ml-embedded" data-form="vbKtGy"></div>
+    </div>
+  </section>
+
+  <footer class="border-t border-neutral-200">
+    <div class="mx-auto max-w-7xl px-4 py-8 text-sm flex justify-between">
+      <p>© <span id="year"></span> Flavorly AI. All rights reserved.</p>
+      <nav class="flex gap-4">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const lines = [
+      "Hi, I'm Flavorly AI.",
+      "Your personal dining assistant every time you go to a restaurant.",
+      "Stop worrying about what to order.",
+      "I know your tastes, your restrictions, and your goals.",
+      "I'll pick the dish that fits you so you save time, money and energy."
+    ];
+
+    new Typed('#typed', {
+      strings: lines,
+      typeSpeed: 35,
+      backSpeed: 0,
+      backDelay: 1000,
+      loop: false,
+      showCursor: true,
+      cursorChar: '▍',
+      onComplete: () => document.getElementById('cta').classList.remove('hidden')
+    });
+
+    document.getElementById('continueBtn')?.addEventListener('click', () => {
+      document.getElementById('intro-screen').classList.add('hidden');
+      const formScreen = document.getElementById('form-screen');
+      formScreen.classList.remove('hidden');
+      formScreen.classList.add('fade-in');
+    });
+  </script>
+</body>
+</html>
