@@ -5,18 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Flavorly AI — Your personal dining assistant</title>
   <meta name="description" content="Pick any restaurant. Flavorly AI finds your perfect dish. Save time, money, and energy every time you eat out." />
-  <meta property="og:title" content="Flavorly AI — Your personal dining assistant" />
-  <meta property="og:description" content="Pick any restaurant. Flavorly AI finds your perfect dish." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://dummyimage.com/1200x630/FF7F00/ffffff&text=Flavorly+AI" />
   <meta name="theme-color" content="#FF7F00" />
 
-  <!-- Fonts -->
+  <!-- Fonts & Tailwind -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-
-  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -31,53 +25,40 @@
     }
   </script>
 
+  <!-- Typed.js -->
+  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+
   <!-- MailerLite Universal -->
   <script>
-    (function(w,d,e,u,f,l,n){
-      w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};
-      l=d.createElement(e); l.async=1; l.src=u;
-      n=d.getElementsByTagName(e)[0]; n.parentNode.insertBefore(l,n);
-    })(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};l=d.createElement(e);l.async=1;l.src=u;n=d.getElementsByTagName(e)[0];n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
     ml('account', '1777931');
   </script>
 
   <style>
     :root { color-scheme: light; }
-    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-    .fade-in { animation: fade-in 220ms ease-out both; }
-    @keyframes fade-in { from { opacity:0 } to { opacity:1 } }
-
+    html,body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
     .bg-sand { background:#FAF3E0; }
-    .text-brand { color:#FF7F00; }
+    .fade-in { animation: fade-in .22s ease-out both; }
+    @keyframes fade-in { from{opacity:0} to{opacity:1} }
 
-    #form-screen * { box-sizing: border-box; }
-    #form-screen .ml-embedded,
-    #form-screen .ml-form-embedContainer,
-    #form-screen .ml-form-embedWrapper,
-    #form-screen .ml-form-embedBody,
-    #form-screen .ml-form-embedContent {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    #form-screen input[type="email"],
-    #form-screen input[type="text"],
-    #form-screen button,
-    #form-screen .primary {
-      width: 100% !important;
-      border-radius: 12px !important;
-      padding: 12px 14px !important;
+    .ml-form-close, [class*="ml-form-close"], .ml-mobileOverlayClose { display:none!important; }
+    .ml-form-poweredby, [class*="ml-form-poweredby"], a[href*="mailerlite.com"][target], img[alt*="MailerLite"] { display:none!important; }
+
+    #form-screen input[type="email"], #form-screen input[type="text"], #form-screen button {
+      width:100%!important; border-radius:12px!important; padding:12px 14px!important;
     }
 
-    .ml-form-close, .ml-mobileOverlayClose,
-    .ml-form-poweredby, [class*="ml-form-poweredby"],
-    a[href*="mailerlite.com"][target], img[alt*="MailerLite"] {
-      display: none !important;
+    #form-screen .ml-form-title, #form-screen .ml-form-title * { color:#FF7F00!important; }
+    #form-screen .ml-form-title h1, #form-screen .ml-form-title h2, #form-screen .ml-form-title h3 {
+      font-weight:800!important; letter-spacing:.3px!important; margin-bottom:.75rem!important; text-align:center!important;
     }
   </style>
 </head>
+
 <body class="bg-sand text-neutral-900 antialiased">
-  <main id="intro-screen" class="min-h-screen flex items-center justify-center px-5 bg-sand">
+
+  <!-- INTRO / HERO -->
+  <main id="intro-screen" class="min-h-screen flex items-center justify-center px-5">
     <div class="w-full max-w-2xl">
       <div class="rounded-3xl border border-neutral-200 shadow-xl p-8 md:p-12 bg-white">
         <div class="flex items-center justify-between mb-6">
@@ -86,12 +67,12 @@
         </div>
 
         <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-center">
-          <span id="typed" class="inline-block"></span>
+          <span id="typed"></span>
         </h1>
 
         <div class="mt-8 text-center hidden" id="cta">
           <button id="continueBtn" type="button"
-            class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/30">
+                  class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/30">
             Continue
           </button>
           <p class="mt-3 text-xs text-neutral-500">Be among the first to request access.</p>
@@ -100,12 +81,14 @@
     </div>
   </main>
 
+  <!-- FORM SCREEN -->
   <section id="form-screen" class="hidden min-h-screen w-full flex items-center justify-center" style="background:#FAF3E0;">
     <div class="w-full max-w-5xl px-4">
       <div class="ml-embedded" data-form="vbKtGy"></div>
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-sm flex flex-col sm:flex-row items-center justify-between gap-2">
       <p>© <span id="year"></span> Flavorly AI. All rights reserved.</p>
@@ -120,50 +103,51 @@
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
 
-    const lines = [
-      "Smart AI that picks dishes you'll love",
-      "Helping you decide in seconds",
-      "Save time, money and energy at restaurants"
-    ];
-    const speed = 35;
-    const typedEl = document.getElementById('typed');
-    const cta = document.getElementById('cta');
+    const typed = new Typed('#typed', {
+      strings: ["Your personal dining assistant — every menu, every time."],
+      typeSpeed: 35,
+      backSpeed: 0,
+      loop: false,
+      showCursor: true,
+      cursorChar: '▍',
+      onComplete: () => document.getElementById('cta').classList.remove('hidden')
+    });
 
-    function typeSequence(lines, el, speed, done) {
-      let li = 0, ci = 0;
-      function tick() {
-        if (li >= lines.length) { done && done(); return; }
-        const current = lines[li];
-        if (ci < current.length) {
-          el.innerHTML += current[ci];
-          ci++;
-          setTimeout(tick, speed);
-        } else {
-          if (li < lines.length - 1) el.innerHTML += "<br>";
-          li++; ci = 0;
-          setTimeout(tick, 450);
-        }
-      }
-      tick();
-    }
-
-    typeSequence(lines, typedEl, speed, () => cta.classList.remove('hidden'));
-
-    function showFormScreen() {
-      const intro = document.getElementById('intro-screen');
-      const formScreen = document.getElementById('form-screen');
-      if (intro) intro.style.display = 'none';
-      if (formScreen) {
-        formScreen.classList.remove('hidden');
-        formScreen.classList.add('fade-in');
-      }
+    document.getElementById('continueBtn')?.addEventListener('click', () => {
+      document.getElementById('intro-screen').style.display = 'none';
+      const fs = document.getElementById('form-screen');
+      fs.classList.remove('hidden'); fs.classList.add('fade-in');
       setTimeout(() => {
-        const email = formScreen && formScreen.querySelector('input[type="email"]');
-        if (email) email.focus();
+        const emailInput = fs.querySelector('input[type="email"]');
+        emailInput?.focus();
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }, 200);
-    }
-    document.getElementById('continueBtn')?.addEventListener('click', showFormScreen);
+    });
+
+    // Force custom success message
+    (function customizeMailerLiteSuccess() {
+      const root = document.querySelector('#form-screen .ml-embedded');
+      if (!root) return;
+
+      const setCustomSuccess = (scope) => {
+        const node = scope.querySelector('.ml-form-successBody, .ml-form-successContent, [class*="success"]');
+        if (node && !node.dataset.flavorlyCustomized) {
+          node.innerHTML = `
+            <div class="py-8 text-center">
+              <h2 class="text-2xl md:text-3xl font-extrabold text-brand">Welcome to Flavorly.</h2>
+              <p class="mt-3 text-base text-neutral-700">You’ll be among the first to try AI-powered dish picks.</p>
+            </div>
+          `;
+          node.dataset.flavorlyCustomized = '1';
+        }
+      };
+
+      const obs = new MutationObserver(muts => {
+        muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) setCustomSuccess(n); }));
+        setCustomSuccess(root);
+      });
+      obs.observe(root, { childList: true, subtree: true });
+    })();
   </script>
 </body>
 </html>
