@@ -31,63 +31,79 @@
     }
   </script>
 
-  <!-- Typed.js -->
+  <!-- Typed.js (typewriter effect) -->
   <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
   <!-- MailerLite Universal -->
-  <script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);},l=d.createElement(e),l.async=1,l.src=u,n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+<script>
+    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
+    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
+    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
+    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
     ml('account', '1777931');
-  </script>
+</script>
+<!-- End MailerLite Universal -->
 
   <style>
-    html, body { font-family: 'Inter', sans-serif; background: #FAF3E0; }
+    :root { color-scheme: light dark; }
+    html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
+  
     .fade-in { animation: fade-in 220ms ease-out both; }
     @keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
+  
+  /* Brand + beige */
+  :root { color-scheme: light; }
+  .bg-sand { background: #FAF3E0; }
+  .text-brand { color: #FF7F00; }
 
-    /* Hide MailerLite close + badge */
-    .ml-form-close, [class*="ml-form-close"],
-    .ml-form-poweredby, [class*="ml-form-poweredby"],
-    img[alt*="MailerLite"] { display: none !important; }
-  </style>
+  /* Force Typed.js text to black */
+  #typed { color: #000000 !important; }
+
+</style>
 </head>
-<body class="antialiased">
-  <!-- INTRO -->
-  <main id="intro-screen" class="min-h-screen flex items-center justify-center px-5">
+<body class="bg-sand text-neutral-900 antialiased">
+  <!-- HERO / TYPED -->
+  <main id="intro-screen" class="min-h-screen flex items-center justify-center px-5 bg-sand">
     <div class="w-full max-w-2xl">
-      <div class="rounded-3xl border shadow-xl p-8 bg-white">
+      <div class="rounded-3xl border border-neutral-200 shadow-xl p-8 md:p-12 bg-white">
         <div class="flex items-center justify-between mb-6">
-          <div class="font-extrabold text-lg text-brand">Flavorly AI</div>
+          <div class="flex items-center gap-3">
+            <div class="font-extrabold tracking-tight text-lg text-brand">Flavorly AI</div></div>
           <div class="text-xs text-neutral-500">Exclusive pre-launch</div>
         </div>
-        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-center">
-          <span id="typed"></span>
-        </h1>
-        <div class="mt-8 text-center hidden" id="cta">
-          <button id="continueBtn" type="button"
-            class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark focus:ring-2 focus:ring-brand/30">
-            Continue
-          </button>
-          <p class="mt-3 text-xs text-neutral-500">Be among the first to request access.</p>
-        </div>
+
+              <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-center">
+        <span id="typed"></span>
+      </h1>
+
+      <!-- Continue is hidden until typing ends -->
+      <div class="mt-8 text-center hidden" id="cta">
+        <button id="continueBtn" type="button"
+          class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/30">
+          Continue
+        </button>
+        <p class="mt-3 text-xs text-neutral-500">Be among the first to request access.</p>
+      </div>
       </div>
     </div>
   </main>
 
-  <!-- FORM -->
-  <section id="form-screen" class="hidden min-h-screen flex items-center justify-center">
-    <div class="w-full max-w-5xl px-4">
-      <div class="ml-embedded" data-form="vbKtGy"></div>
-    </div>
-  </section>
+  <!-- FORM SCREEN (HIDDEN BY DEFAULT) -->
+<section id="form-screen"
+         class="hidden min-h-screen w-full flex items-center justify-center"
+         style="background:#FAF3E0;">
+  <div class="w-full max-w-5xl px-4">
+    <div class="ml-embedded" data-form="vbKtGy"></div>
+  </div>
+</section>
 
   <footer class="border-t border-neutral-200">
-    <div class="mx-auto max-w-7xl px-4 py-8 text-sm flex justify-between">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-sm flex flex-col sm:flex-row items-center justify-between gap-2">
       <p>© <span id="year"></span> Flavorly AI. All rights reserved.</p>
-      <nav class="flex gap-4">
-        <a href="#">Privacy</a>
-        <a href="#">Terms</a>
-        <a href="#">Contact</a>
+      <nav class="flex items-center gap-4">
+        <a href="#" class="hover:text-brand">Privacy</a>
+        <a href="#" class="hover:text-brand">Terms</a>
+        <a href="#" class="hover:text-brand">Contact</a>
       </nav>
     </div>
   </footer>
@@ -113,13 +129,27 @@
       cursorChar: '▍',
       onComplete: () => document.getElementById('cta').classList.remove('hidden')
     });
+  </script>
 
-    document.getElementById('continueBtn')?.addEventListener('click', () => {
-      document.getElementById('intro-screen').classList.add('hidden');
-      const formScreen = document.getElementById('form-screen');
+  <script>
+  const intro = document.getElementById('intro-screen');
+  const formScreen = document.getElementById('form-screen');
+  const btn = document.getElementById('continueBtn');
+
+  function showFormScreen() {
+    if (intro) intro.classList.add('hidden');
+    if (formScreen) {
       formScreen.classList.remove('hidden');
       formScreen.classList.add('fade-in');
-    });
+    }
+    setTimeout(() => {
+      const emailInput = formScreen && formScreen.querySelector('input[type="email"], input[name="email"], input[name="fields[email]"]');
+      if (emailInput) emailInput.focus();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 150);
+  }
+
+  if (btn) btn.addEventListener('click', showFormScreen);
   </script>
 </body>
 </html>
