@@ -16,7 +16,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CDN -->
+  <!-- Tailwind via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -24,78 +24,87 @@
         extend: {
           colors: {
             brand: { DEFAULT: '#FF7F00', dark: '#E36F00' },
-            sand: { DEFAULT: '#FAF3E0' }
+            sand:  { DEFAULT: '#FAF3E0' }
           }
         }
       }
     }
   </script>
 
-  <!-- Typed.js (typewriter effect) -->
-  <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-
   <!-- MailerLite Universal -->
-<script>
-    (function(w,d,e,u,f,l,n){w[f]=w[f]||function(){(w[f].q=w[f].q||[])
-    .push(arguments);},l=d.createElement(e),l.async=1,l.src=u,
-    n=d.getElementsByTagName(e)[0],n.parentNode.insertBefore(l,n);})
-    (window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
+  <script>
+    (function(w,d,e,u,f,l,n){
+      w[f]=w[f]||function(){(w[f].q=w[f].q||[]).push(arguments);};
+      l=d.createElement(e); l.async=1; l.src=u;
+      n=d.getElementsByTagName(e)[0]; n.parentNode.insertBefore(l,n);
+    })(window,document,'script','https://assets.mailerlite.com/js/universal.js','ml');
     ml('account', '1777931');
-</script>
-<!-- End MailerLite Universal -->
+  </script>
 
   <style>
-    :root { color-scheme: light dark; }
+    :root { color-scheme: light; }
     html, body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif; }
-  
     .fade-in { animation: fade-in 220ms ease-out both; }
-    @keyframes fade-in { from { opacity: 0 } to { opacity: 1 } }
-  
-  /* Brand + beige */
-  :root { color-scheme: light; }
-  .bg-sand { background: #FAF3E0; }
-  .text-brand { color: #FF7F00; }
+    @keyframes fade-in { from { opacity:0 } to { opacity:1 } }
 
-  /* Force Typed.js text to black */
-  #typed { color: #000000 !important; }
+    .bg-sand { background:#FAF3E0; }
+    .text-brand { color:#FF7F00; }
 
-</style>
+    #form-screen * { box-sizing: border-box; }
+    #form-screen .ml-embedded,
+    #form-screen .ml-form-embedContainer,
+    #form-screen .ml-form-embedWrapper,
+    #form-screen .ml-form-embedBody,
+    #form-screen .ml-form-embedContent {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    #form-screen input[type="email"],
+    #form-screen input[type="text"],
+    #form-screen button,
+    #form-screen .primary {
+      width: 100% !important;
+      border-radius: 12px !important;
+      padding: 12px 14px !important;
+    }
+
+    .ml-form-close, .ml-mobileOverlayClose,
+    .ml-form-poweredby, [class*="ml-form-poweredby"],
+    a[href*="mailerlite.com"][target], img[alt*="MailerLite"] {
+      display: none !important;
+    }
+  </style>
 </head>
 <body class="bg-sand text-neutral-900 antialiased">
-  <!-- HERO / TYPED -->
   <main id="intro-screen" class="min-h-screen flex items-center justify-center px-5 bg-sand">
     <div class="w-full max-w-2xl">
       <div class="rounded-3xl border border-neutral-200 shadow-xl p-8 md:p-12 bg-white">
         <div class="flex items-center justify-between mb-6">
-          <div class="flex items-center gap-3">
-            <div class="font-extrabold tracking-tight text-lg text-brand">Flavorly AI</div></div>
+          <div class="font-extrabold tracking-tight text-lg text-brand">Flavorly AI</div>
           <div class="text-xs text-neutral-500">Exclusive pre-launch</div>
         </div>
 
-              <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-center">
-        <span id="typed"></span>
-      </h1>
+        <h1 class="text-3xl md:text-4xl font-extrabold leading-tight text-center">
+          <span id="typed" class="inline-block"></span>
+        </h1>
 
-      <!-- Continue is hidden until typing ends -->
-      <div class="mt-8 text-center hidden" id="cta">
-        <button id="continueBtn" type="button"
-          class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/30">
-          Continue
-        </button>
-        <p class="mt-3 text-xs text-neutral-500">Be among the first to request access.</p>
-      </div>
+        <div class="mt-8 text-center hidden" id="cta">
+          <button id="continueBtn" type="button"
+            class="inline-flex items-center justify-center rounded-xl bg-brand px-6 py-3 font-semibold text-white hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-brand/30">
+            Continue
+          </button>
+          <p class="mt-3 text-xs text-neutral-500">Be among the first to request access.</p>
+        </div>
       </div>
     </div>
   </main>
 
-  <!-- FORM SCREEN (HIDDEN BY DEFAULT) -->
-<section id="form-screen"
-         class="hidden min-h-screen w-full flex items-center justify-center"
-         style="background:#FAF3E0;">
-  <div class="w-full max-w-5xl px-4">
-    <div class="ml-embedded" data-form="vbKtGy"></div>
-  </div>
-</section>
+  <section id="form-screen" class="hidden min-h-screen w-full flex items-center justify-center" style="background:#FAF3E0;">
+    <div class="w-full max-w-5xl px-4">
+      <div class="ml-embedded" data-form="vbKtGy"></div>
+    </div>
+  </section>
 
   <footer class="border-t border-neutral-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 text-sm flex flex-col sm:flex-row items-center justify-between gap-2">
@@ -112,44 +121,49 @@
     document.getElementById('year').textContent = new Date().getFullYear();
 
     const lines = [
-      "Hi, I'm Flavorly AI.",
-      "Your personal dining assistant every time you go to a restaurant.",
-      "Stop worrying about what to order.",
-      "I know your tastes, your restrictions, and your goals.",
-      "I'll pick the dish that fits you so you save time, money and energy."
+      "Smart AI that picks dishes you'll love",
+      "Helping you decide in seconds",
+      "Save time, money and energy at restaurants"
     ];
+    const speed = 35;
+    const typedEl = document.getElementById('typed');
+    const cta = document.getElementById('cta');
 
-    new Typed('#typed', {
-      strings: lines,
-      typeSpeed: 35,
-      backSpeed: 0,
-      backDelay: 1000,
-      loop: false,
-      showCursor: true,
-      cursorChar: '▍',
-      onComplete: () => document.getElementById('cta').classList.remove('hidden')
-    });
-  </script>
-
-  <script>
-  const intro = document.getElementById('intro-screen');
-  const formScreen = document.getElementById('form-screen');
-  const btn = document.getElementById('continueBtn');
-
-  function showFormScreen() {
-    if (intro) intro.classList.add('hidden');
-    if (formScreen) {
-      formScreen.classList.remove('hidden');
-      formScreen.classList.add('fade-in');
+    function typeSequence(lines, el, speed, done) {
+      let li = 0, ci = 0;
+      function tick() {
+        if (li >= lines.length) { done && done(); return; }
+        const current = lines[li];
+        if (ci < current.length) {
+          el.innerHTML += current[ci];
+          ci++;
+          setTimeout(tick, speed);
+        } else {
+          if (li < lines.length - 1) el.innerHTML += "<br>";
+          li++; ci = 0;
+          setTimeout(tick, 450);
+        }
+      }
+      tick();
     }
-    setTimeout(() => {
-      const emailInput = formScreen && formScreen.querySelector('input[type="email"], input[name="email"], input[name="fields[email]"]');
-      if (emailInput) emailInput.focus();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, 150);
-  }
 
-  if (btn) btn.addEventListener('click', showFormScreen);
+    typeSequence(lines, typedEl, speed, () => cta.classList.remove('hidden'));
+
+    function showFormScreen() {
+      const intro = document.getElementById('intro-screen');
+      const formScreen = document.getElementById('form-screen');
+      if (intro) intro.style.display = 'none';
+      if (formScreen) {
+        formScreen.classList.remove('hidden');
+        formScreen.classList.add('fade-in');
+      }
+      setTimeout(() => {
+        const email = formScreen && formScreen.querySelector('input[type="email"]');
+        if (email) email.focus();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }, 200);
+    }
+    document.getElementById('continueBtn')?.addEventListener('click', showFormScreen);
   </script>
 </body>
 </html>
